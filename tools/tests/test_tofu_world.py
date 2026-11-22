@@ -135,3 +135,13 @@ def test_offline_speaker_skips_the_event(harness, monkeypatch):
 
     assert not tw.process_tofu_world_player_msg_event(_Db(), None, {}, event)
     assert harness['marks'] == ['skipped']
+
+
+def test_world_event_types_are_in_the_event_type_enum():
+    # llm_chatter_events.event_type is an ENUM: a type missing from the
+    # migrations is rejected by MySQL's strict mode at insert time.
+    from pathlib import Path
+    sql_dir = Path(__file__).resolve().parents[2] / 'data' / 'sql' / 'characters'
+    sql = '\n'.join(p.read_text(encoding='utf-8') for p in sql_dir.rglob('*.sql'))
+    for event_type in ('tofu_world_ambient', 'tofu_world_player_msg'):
+        assert f"'{event_type}'" in sql or f"''{event_type}''" in sql
