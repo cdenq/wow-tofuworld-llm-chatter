@@ -16,6 +16,7 @@
 #include "LLMChatterReactivity.h"
 #include "LLMChatterReplyHold.h"
 #include "LLMChatterShared.h"
+#include "LLMChatterTofuWorld.h"
 
 void AddLLMChatterCommandScripts();
 
@@ -38,4 +39,5 @@ void AddLLMChatterScripts()
     AddLLMChatterAmbientScripts();
     AddLLMChatterReactivityScripts();
     AddLLMChatterOnlineStateScripts();
+    AddLLMChatterTofuWorldScripts();
 }

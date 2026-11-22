@@ -1285,6 +1285,41 @@ EVENT_REGISTRY: Dict[str, EventSpec] = {
         },
     ),
 
+    # -- Tofu World channel (chatter_tofu_world) --
+
+    'tofu_world_ambient': EventSpec(
+        handler_module='chatter_tofu_world',
+        handler_func='process_tofu_world_ambient_event',
+        producer='LLMChatterTofuWorld.cpp',
+        description=(
+            'Bot posts unprompted in the custom World channel'
+        ),
+        payload_fields={
+            'channel_name': (str, True),
+            'speaker_zone_id': (int, True),
+            'conversation': (int, True),
+            'history_limit': (int, False),
+        },
+    ),
+
+    'tofu_world_player_msg': EventSpec(
+        handler_module='chatter_tofu_world',
+        handler_func='process_tofu_world_player_msg_event',
+        producer='LLMChatterTofuWorld.cpp',
+        priority='high',
+        description=(
+            'Bot answers a player in the custom World channel'
+        ),
+        payload_fields={
+            'channel_name': (str, True),
+            'player_name': (str, True),
+            'player_message': (str, True),
+            'bot_guids': (list, True),
+            'mentioned': (int, True),
+            'history_limit': (int, False),
+        },
+    ),
+
     # -- World events (chatter_world_events) ------
 
     'transport_arrives': EventSpec(

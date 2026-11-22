@@ -129,11 +129,13 @@ def test_grouped_rules_are_unchanged_per_path():
 
 
 def test_delivery_rechecks_general_and_guild_speakers_only():
+    # Tofu: the World channel ('world') shares the General/Guild rule.
     delivery = _src("LLMChatterDelivery.cpp")
     assert delivery.count("IsChatterSpeakerAllowed(") == 1
     guard = delivery.split("char const* speakerDrop = nullptr;", 1)[1]
     guard = guard.split("\n    }\n", 1)[0]
-    assert '(channel == "general" || channel == "guild")' in guard
+    assert '(channel == "general" || channel == "guild"' in guard
+    assert '|| channel == "world")' in guard
     assert "IsChatterSpeakerAllowed(bot, &speakerDrop)" in guard
     assert "botUnavailable = true;" in guard
     assert "dropReason = speakerDrop;" in guard

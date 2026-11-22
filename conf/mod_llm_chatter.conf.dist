@@ -5388,3 +5388,96 @@ LLMChatter.Rumors.RepeatCooldownMinutes = 180
 #       Default: 50
 #
 LLMChatter.Rumors.AddressedChance = 50
+
+###############################################################################
+# TOFU WORLD CHANNEL [SERVER] (Tofu Worldview addition)
+#
+#   LLM chatter in a realm-wide custom chat channel (default "World"), which
+#   both factions share when AllowTwoSide.Interaction.Channel = 1. Bots
+#   anywhere on the realm post there, mostly bots outside the zones where real
+#   players are, and they answer what real players type there. Bots must
+#   already be members of the channel (this module never joins them).
+#   Only runs while at least one real player is online.
+#   Rows use channel 'world'; see src/LLMChatterTofuWorld.cpp and
+#   tools/chatter_tofu_world.py. History: llm_tofu_world_history.
+#
+###############################################################################
+
+#
+#   LLMChatter.Tofu.World.Enable
+#       Master switch. Turning it off with .reload config also drops World
+#       lines already queued.
+#       Default: 0
+#
+LLMChatter.Tofu.World.Enable = 0
+
+#
+#   LLMChatter.Tofu.World.ChannelName
+#       Name of the custom channel (case-insensitive). Built-in zone channels
+#       such as General or Trade are never used.
+#       Default: World
+#
+LLMChatter.Tofu.World.ChannelName = World
+
+#
+#   LLMChatter.Tofu.World.TriggerIntervalSeconds
+#   LLMChatter.Tofu.World.TriggerChance
+#       Every TriggerIntervalSeconds (minimum 10), TriggerChance (0-100) that
+#       a bot starts an unprompted World line. 60 and 40 give one about every
+#       two and a half minutes.
+#       Default: 60, 40
+#
+LLMChatter.Tofu.World.TriggerIntervalSeconds = 60
+LLMChatter.Tofu.World.TriggerChance = 40
+
+#
+#   LLMChatter.Tofu.World.ConversationChance
+#       Chance (0-100) that a second bot answers the unprompted line.
+#       Default: 35
+#
+LLMChatter.Tofu.World.ConversationChance = 35
+
+#
+#   LLMChatter.Tofu.World.LocalBotChance
+#       Chance (0-100) that the speaker is a bot in a zone with a real player
+#       (those bots also have General and /say). Otherwise a bot elsewhere is
+#       picked; a local bot is used only when no other bot is available.
+#       Default: 15
+#
+LLMChatter.Tofu.World.LocalBotChance = 15
+
+#
+#   LLMChatter.Tofu.World.ReplyChance
+#   LLMChatter.Tofu.World.QuestionReplyChance
+#   LLMChatter.Tofu.World.ReplyCooldownSeconds
+#       Chance (0-100) that a bot answers a real player's World line. A bot
+#       named in the line always answers. A line ending in "?" uses
+#       QuestionReplyChance; any other line uses ReplyChance, at most once per
+#       ReplyCooldownSeconds.
+#       Default: 50, 100, 15
+#
+LLMChatter.Tofu.World.ReplyChance = 50
+LLMChatter.Tofu.World.QuestionReplyChance = 100
+LLMChatter.Tofu.World.ReplyCooldownSeconds = 15
+
+#
+#   LLMChatter.Tofu.World.BotCooldownSeconds
+#       Minimum seconds before the same bot starts or joins another
+#       unprompted World line. Replies to players ignore it.
+#       Default: 300
+#
+LLMChatter.Tofu.World.BotCooldownSeconds = 300
+
+#
+#   LLMChatter.Tofu.World.MaxCandidates
+#       Bots (1-5) offered to the bridge as possible answerers.
+#       Default: 3
+#
+LLMChatter.Tofu.World.MaxCandidates = 3
+
+#
+#   LLMChatter.Tofu.World.HistoryLimit
+#       Recent World lines (1-50) given to the LLM as context.
+#       Default: 12
+#
+LLMChatter.Tofu.World.HistoryLimit = 12

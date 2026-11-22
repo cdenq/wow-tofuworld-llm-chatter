@@ -85,5 +85,6 @@
   "populate_subzone_lore.py:call_anthropic:client.messages.create:1": "offline",
   "populate_subzone_lore.py:call_openai:create_chat_completion:1": "offline",
   "screenshot_agent.py:_structured_vision_call:structured_completion:1": "transport",
-  "screenshot_agent.py:_call_openai:create_chat_completion:1": "transport"
+  "screenshot_agent.py:_call_openai:create_chat_completion:1": "transport",
+  "chatter_tofu_world.py:_generate:call_llm:1": "text"
 }

@@ -21,6 +21,7 @@
 
 #include "Channel.h"
 #include "ChannelMgr.h"
+#include "LLMChatterTofuWorld.h"
 #include "Chat.h"
 #include "Creature.h"
 #include "DatabaseEnv.h"
@@ -547,6 +548,16 @@ void DeliverPendingMessagesImpl()
         return;
     }
 
+    // Tofu World channel toggle (LLMChatterTofuWorld.cpp):
+    // consume queued World rows while the feature is off.
+    if (channel == "world" && !TofuWorld::IsActive())
+    {
+        FinalizeDroppedMessage(
+            messageId, eventId, sequence,
+            eventType, "tofu_world_disabled");
+        return;
+    }
+
     // Master GroupChatter toggle. Party/raid channels are
     // shared by group, raid-boss, and BG chatter, so we gate
     // on owner_subsystem (the authoritative classifier set at
@@ -762,7 +773,8 @@ void DeliverPendingMessagesImpl()
     // speaker rule so a line never goes out in a real player's name.
     char const* speakerDrop = nullptr;
     if (!botUnavailable
-        && (channel == "general" || channel == "guild")
+        && (channel == "general" || channel == "guild"
+            || channel == "world")
         && !IsChatterSpeakerAllowed(bot, &speakerDrop))
     {
         bot = nullptr;
@@ -1343,6 +1355,23 @@ void DeliverPendingMessagesImpl()
                         processedMessage);
                 }
             }
+            else if (channel == "world")
+            {
+                // Tofu World channel: realm-wide, so no
+                // action emote (nobody nearby sees it).
+                char const* worldDrop = nullptr;
+                if (TofuWorld::Deliver(
+                        bot, processedMessage, &worldDrop))
+                {
+                    sent = true;
+                }
+                else
+                {
+                    botUnavailable = true;
+                    dropReason = worldDrop
+                        ? worldDrop : "world_unavailable";
+                }
+            }
             else
             {
                 // Force-enroll the bot in the
@@ -1403,6 +1432,7 @@ void DeliverPendingMessagesImpl()
                 && !emoteOnly
                 && !emoteName.empty()
                 && channel != "general"
+                && channel != "world"
                 && channel != "yell")
             {
                 if (!((channel == "battleground"

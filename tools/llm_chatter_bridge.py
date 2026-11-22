@@ -769,6 +769,8 @@ EVENT_LOG_OVERRIDES = {
     'bot_group_screenshot_observation': 'Screenshot vision',
     'bot_group_general_reaction': 'General-to-party relay',
     'player_general_msg': 'General chat event',
+    'tofu_world_ambient': 'World channel chatter',
+    'tofu_world_player_msg': 'World channel reply',
     'guild_meet_greeting': 'Guild meet greeting',
     'guild_join_zone_announce': 'Guild join announcement',
     'guild_npc_encounter': 'Guild NPC encounter',

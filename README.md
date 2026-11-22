@@ -4,6 +4,11 @@
 
 # mod-llm-chatter
 
+> **Tofu Worldview fork** (`cdenq/wow-tofuworld-llm-chatter`, branch `tofu`). Changes from upstream:
+>
+> - **World channel chatter** (`src/LLMChatterTofuWorld.cpp`, `tools/chatter_tofu_world.py`, table `llm_tofu_world_history`): bots anywhere on the realm, mostly outside the zones where real players are, post in a custom realm-wide channel (default `World`) and answer real players there. Keys `LLMChatter.Tofu.World.*` at the end of `conf/mod_llm_chatter.conf.dist`; off by default.
+> - **Optional SQL moved out of `data/sql`**: the core's updater applies every `.sql` under a module's `data/sql/characters` and `data/sql/world`, so the optional talent data (`world/`) and the memory cleanup (`characters/optional/`) now live in `data/sql-optional/` and are never applied automatically.
+
 **Every hero has a story. Your companions are ready to tell theirs.**
 
 A fantasy roleplay conversation engine for [AzerothCore](https://www.azerothcore.org/) WotLK (3.3.5a) and [mod-playerbots](https://github.com/mod-playerbots/mod-playerbots). It replaces the silence of automated bots with personality-driven, lore-grounded dialogue, giving every companion a voice shaped by their race, class, and the world around them. Whether you're soloing through the cursed woods of Duskwood, descending into the titan halls of Ulduar with a full raid, or clashing over flags in Warsong Gulch, your party feels like a band of adventurers sharing a journey through Azeroth.
