@@ -182,7 +182,7 @@ std::string BuildSpeakerGroupJson(Player* bot)
         if (!member)
             continue;
 
-        bool near = member->IsInWorld()
+        bool isNear = member->IsInWorld()
             && member->GetMap() == bot->GetMap()
             && member->GetInstanceId() == bot->GetInstanceId()
             && bot->IsWithinDistInMap(member, nearRadius);
@@ -194,7 +194,7 @@ std::string BuildSpeakerGroupJson(Player* bot)
         members += "{\"name\":\""
             + ChatterJsonEscape(member->GetName())
             + "\",\"is_player\":" + BoolJson(!IsPlayerBot(member))
-            + ",\"near\":" + BoolJson(near)
+            + ",\"near\":" + BoolJson(isNear)
             + ",\"same_zone\":" + BoolJson(sameZone) + "}";
         ++listed;
     }
