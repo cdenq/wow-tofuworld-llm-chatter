@@ -1060,12 +1060,12 @@ class SqlAndConfTests(unittest.TestCase):
             _read('README.md').count('20261101_memory_active_index.sql'), 2)
 
     def test_cleanup_script_scope(self):
-        header = _read('data/sql/characters/optional/memory_cleanup.sql')[:900]
+        header = _read('data/sql-optional/characters/memory_cleanup.sql')[:900]
         self.assertIn('Meant for roleplay journals', header)
         self.assertIn('English text only', header)
 
     def test_cleanup_script_never_touches_first_meeting(self):
-        script = _read('data/sql/characters/optional/memory_cleanup.sql')
+        script = _read('data/sql-optional/characters/memory_cleanup.sql')
         statements = [s for s in script.split(';') if re.search(
             r'\b(SELECT|DELETE)\b', s)]
         self.assertEqual(len(statements), 2)

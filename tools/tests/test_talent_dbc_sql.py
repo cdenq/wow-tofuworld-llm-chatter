@@ -13,7 +13,7 @@ MODULE_DIR = Path(__file__).resolve().parents[2]
 BASE_SQL = (
     MODULE_DIR
     / "data"
-    / "sql"
+    / "sql-optional"
     / "world"
     / "base"
     / "llm_chatter_talent_dbc.sql"
@@ -21,7 +21,7 @@ BASE_SQL = (
 UPDATE_SQL = (
     MODULE_DIR
     / "data"
-    / "sql"
+    / "sql-optional"
     / "world"
     / "updates"
     / "20260816_fix_pet_talent_masks.sql"
@@ -29,7 +29,7 @@ UPDATE_SQL = (
 SPELL_DBC_REPAIR_SQL = (
     MODULE_DIR
     / "data"
-    / "sql"
+    / "sql-optional"
     / "world"
     / "updates"
     / "20260913_remove_legacy_spell_dbc_placeholders.sql"
